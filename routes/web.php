@@ -60,7 +60,10 @@ Route::controller(LoginRegisterController::class)->group(function() {
 });
 
 
-Route::get('/send-mail', [SendEmailController::class,
-'index'])->name('kirim-email');
+Route::get('/send-mail', [SendEmailController::class,'index'])->name('kirim-email');
 
 Route::post('/post-email', [SendEmailController::class, 'store'])->name('post-email');
+
+Route::middleware('auth')->group(function () {
+    Route::post('/update-photo', [LoginRegisterController::class, 'updatePhoto'])->name('update-photo');
+});

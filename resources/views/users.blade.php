@@ -1,0 +1,1 @@
+<img src="{{asset('storage/'.$user->photo )}}" width="150px">
