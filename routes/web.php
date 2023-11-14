@@ -5,6 +5,9 @@ use App\Http\Controllers\MencobaController;
 use App\Http\Controllers\BukuController;
 use App\Http\Controllers\Auth\LoginRegisterController;
 use App\Http\Controllers\SendEmailController;
+use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\UserController;
+
 
 
 /*
@@ -42,13 +45,13 @@ Route::get('/perumahan', [MencobaController::class, 'daftarPerumahan']);
 
 
 
-Route::get('/buku', [BukuController::class, 'index']);
+// Route::get('/buku', [BukuController::class, 'index']);
 
-Route::get('/buku','BukuController@index');
-Route::get('/buku/create', 'BukuController@create')->name('buku.create');
-Route::get('/buku','BukuController@store')->name('buku.store');
+// Route::get('/buku','BukuController@index');
+// Route::get('/buku/create', 'BukuController@create')->name('buku.create');
+// Route::get('/buku','BukuController@store')->name('buku.store');
 
-Route::post('/buku/delete/{id}', 'BukuController@destroy')->name('buku.destroy');
+// Route::post('/buku/delete/{id}', 'BukuController@destroy')->name('buku.destroy');
 
 Route::controller(LoginRegisterController::class)->group(function() {
     Route::get('/register', 'register')->name('register');
@@ -67,3 +70,9 @@ Route::post('/post-email', [SendEmailController::class, 'store'])->name('post-em
 Route::middleware('auth')->group(function () {
     Route::post('/update-photo', [LoginRegisterController::class, 'updatePhoto'])->name('update-photo');
 });
+
+
+Route::resource('gallery', GalleryController::class);
+Route::get('/gallery/{id}/edit', 'GalleryController@edit')->name('gallery.edit');
+Route::delete('/gallery/{id}', 'GalleryController@destroy')->name('gallery.destroy');
+
